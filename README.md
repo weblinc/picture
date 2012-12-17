@@ -23,6 +23,6 @@ We've chosen to use an ```object``` as our picture element for a few reasons.
 * The ```object``` has been associated with media long before ```video``` and ```audio``` elements
 * Contains ```param``` elements, which adds symantic value and stands in nicely for ```source```
 
-The ```param```'s ```name``` attribute adds a friendly name association to the media query and src grouping. It currently has no affect with in the code base and is merely for user sanity.
+The ```param```'s ```name``` attribute adds a friendly name association to the media query and src grouping. It currently has no effect with in the code base and is merely for user sanity.
 
 Fallback for users without javascript enabled will see the ```noscript``` content.
