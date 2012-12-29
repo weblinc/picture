@@ -3,12 +3,13 @@
 
 // Picture
 (function(win) {
+    'use strict';
 
     var _doc        = win.document,
         _picl       = 0,
         _ratioExpr  = /\b[\d\.]+x\b/g,
         _srcExpr    = /[^\s]+/g,
-        _res        = Media.features.resolution;
+        _res        = win.Media.features.resolution,
         _timer      = 0;
 
     /*
@@ -40,9 +41,9 @@
             parse
         */
         parse: function() {
-            Picture.pictures = [];
+            win.Picture.pictures = [];
 
-            var pics    = _doc.getElementsByTagName('object'),
+            var pics    = _doc.getElementsByTagName('span'),
                 picl    = pics.length,
                 pic     = null;
 
@@ -51,7 +52,7 @@
                     continue;
                 }
 
-                var srcs        = pic.getElementsByTagName('param'),
+                var srcs        = pic.getElementsByTagName('span'),
                     srcl        = srcs.length,
                     src         = null,
                     mql         = '',
@@ -94,36 +95,47 @@
                 var id = _picl;
 
                 do {
-                    var pic     = Picture.pictures[id],
+                    var pic     = win.Picture.pictures[id],
+                        imgs    = [],
                         img     = null,
+                        hasImg  = false,
+                        src     = '',
                         prev    = null,
                         match   = false;
 
                     if (typeof pic === 'undefined') { continue; }
 
-                    match = Media.parseMatch(pic.media, true);
+                    match = win.Media.parseMatch(pic.media, true);
 
                     if (match && !(pic.matches === match.media) || !match && pic.srcDefault) {
                         pic.matches = (match && match.media) || match;
 
-                        img = pic.element.getElementsByTagName('img')[0];
-                        prev = (img && img.getAttribute('src')) || '';
+                        imgs    = pic.element.getElementsByTagName('img');
+                        src     = (match.media && pic.src[match.media]) || pic.srcDefault;
 
-                        if (!img) {
-                            img = document.createElement('img');
-                            img.alt = pic.element.getAttribute('title');
-                            pic.element.appendChild(img);
+                        if (src) {
+                            for (var i = 0, il = imgs.length; i < il; i++) {
+                                img = imgs[i];
+                                if (img.getAttribute('src') === src) {
+                                    img.className = 'match';
+                                    hasImg = true;
+                                } else if (img.className !== 'unmatch') {
+                                    img.className = 'unmatch';
+                                }
+                            }
+
+                            if (!hasImg) {
+                                img             = document.createElement('img');
+                                img.alt         = pic.element.getAttribute('data-title') || 'picture';
+                                img.className   = 'match';
+
+                                pic.element.appendChild(img);
+
+                                img.src = src;
+                            }
                         }
-
-                        Picture.imageError(img, pic, prev);
-
-                        img.src = (match.media && pic.src[match.media]) || pic.srcDefault;
                     } else if (!match) {
                         pic.matches = false;
-
-                        if (pic.srcDefault && (img = pic.element.getElementsByTagName('img')[0])) {
-                            pic.element.removeChild(img);
-                        }
                     }
 
                 } while(id--);
@@ -131,24 +143,13 @@
         },
 
         /*
-            imageError
-        */
-        imageError: function(img, pic, src) {
-            img.onerror = function() {
-                pic.srcDefault = src;
-                src && (this.src = src);
-                this.onerror = null;
-            };
-        },
-
-        /*
             init
         */
         init: function() {
-            Picture.parse();
-            Picture.watch();
+            win.Picture.parse();
+            win.Picture.watch();
 
-            Media.listen(Picture.watch);
+            win.Media.listen(win.Picture.watch);
         }
     };
 

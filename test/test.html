@@ -2,17 +2,27 @@
 <html>
     <head>
         <title></title>
-        <link type="text/css" rel="stylesheet" href="media.css" />
+        <link type="text/css" rel="stylesheet" href="../media-match/media.css" id="test" />
+        <style type="text/css">
+            img.match {
+                width: 100%;
+                max-width: 100%;
+            }
+            img.unmatch {
+                display: none;
+            }
+        </style>
         <script type="text/javascript" src="lib/JSLitmus.js"></script>
-        <script type="text/javascript" src="media.min.js"></script>
-        <script type="text/javascript" src="picture.min.js"></script>
+        <script type="text/javascript" src="../media-match/media.min.js"></script>
+        <script type="text/javascript" src="../picture.min.js"></script>
     </head>
     <body>
-        <object data-picture title="It's a Koala!">
-            <param name="low" data-src="lib/Koala_low.jpg" data-media="(max-width: 400px)" />
-            <param name="medium" data-src="lib/Koala_medium.jpg" data-media="(max-width: 750px)" />
-            <param name="high" data-src="lib/Koala_high.jpg" data-media="(max-width: 1000px)" />
-            <param name="default" data-srcset="lib/Koala-1.jpg 1x, Koala-2.jpg 2x" />
+        <span data-picture data-title="It's a Koala!">
+            <span data-src="lib/Koala_low.jpg" data-media="(max-device-width: 400px)"></span>
+            <span data-src="lib/Koala_medium.jpg" data-media="(max-width: 750px)"></span>
+            <span data-src="lib/Koala_high.jpg" data-media="(min-width: 1000px)"></span>
+            <span data-src="lib/Koala_high.jpg" data-media="(resolution: 2dppx)"></span>
+            <span data-srcset="lib/Koala-1.jpg 1x, Koala-2.jpg 2x"></span>
             
             <!-- Fallback content -->
             <noscript>
