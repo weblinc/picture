@@ -59,11 +59,16 @@
                     srcList     = {},
                     mediaAttr   = '',
                     srcAttr     = '',
-                    srcDef      = '';
+                    srcDef      = '',
+                    width      = '',
+                    height      = '';
 
                 while (srcl-- && (src = srcs[srcl])) {
                     mediaAttr   = src.getAttribute('data-media');
                     srcAttr     = src.getAttribute('data-src') || parseSrcSet(src.getAttribute('data-srcset') || '');
+
+                    width       = src.getAttribute('width');
+                    height      = src.getAttribute('height');
 
                     if (mediaAttr && srcAttr) {
                         srcList[mediaAttr] = srcAttr;
@@ -78,6 +83,8 @@
                     media       : mql,
                     src         : srcList,
                     srcDefault  : srcDef,
+                    width  : width,
+                    height  : height,
                     matches     : false
                 });
 
@@ -127,6 +134,8 @@
                             if (!hasImg) {
                                 img             = document.createElement('img');
                                 img.alt         = pic.element.getAttribute('data-title') || 'picture';
+                                img.width         = pic.width;
+                                img.height         = pic.height;
                                 img.className   = 'match';
 
                                 pic.element.appendChild(img);
