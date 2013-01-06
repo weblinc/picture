@@ -24,7 +24,7 @@
 
             // Math.floor supports the situations when using values such as 1.5x or 1.3x (equals 1)
             if (_res === dppx || Math.floor(_res) === Math.floor(dppx)) {
-                return src.match(_srcExpr)[(ratiol % 2) * 2];
+                return src.match(_srcExpr)[ratiol * 2];
             }
         }
 
