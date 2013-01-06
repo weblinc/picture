@@ -3,6 +3,11 @@ picture
 
 Responsive images based on the 'picture' element proposal. See http://picture.responsiveimages.org/.
 
+##Why?
+* **Browser support**: Tested in IE 6-9, Chrome, Firefox, Opera, Safari, iOS and Android
+* **Speed**: Uses Media's media query parsing method parseMatch() to evaluate matches
+* **Size**: 2kb minified
+
 ###Picture example pattern
 ```
 <span data-picture title="img alt">
