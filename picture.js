@@ -7,7 +7,7 @@
 
     var _doc        = win.document,
         _picl       = 0,
-        _ratioExpr  = /\b[\d\.]+x\b/g,
+        _ratioExpr  = /\s+[\d\.]+x\s*,?/g,
         _srcExpr    = /[^\s]+/g,
         _res        = win.Media.features.resolution,
         _timer      = 0;
@@ -15,17 +15,21 @@
     /*
         parseSrcSet
     */
-    function parseSrcSet(src) {
+    function parseSrcSet(src, precise) {
         var ratios  = src.match(_ratioExpr) || [],
-            ratiol  = ratios.length;
+            ratiol  = ratios.length,
+            srcList = src.replace(_ratioExpr, ' ').match(_srcExpr);
 
         while (ratiol--) {
             var dppx = parseFloat(ratios[ratiol]) * 96;
 
-            // Math.floor supports the situations when using values such as 1.5x or 1.3x (equals 1)
-            if (_res === dppx || Math.floor(_res) === Math.floor(dppx)) {
-                return src.match(_srcExpr)[(ratiol % 2) * 2];
+            if (_res === dppx || (precise === false && Math.floor(_res / 96) === Math.floor(dppx / 96))) {
+                return srcList[ratiol];
             }
+        }
+
+        if (typeof precise === 'undefined') {
+            return parseSrcSet(src, false);
         }
 
         return null;
@@ -59,11 +63,16 @@
                     srcList     = {},
                     mediaAttr   = '',
                     srcAttr     = '',
-                    srcDef      = '';
+                    srcDef      = '',
+                    width       = '',
+                    height      = '';
 
                 while (srcl-- && (src = srcs[srcl])) {
                     mediaAttr   = src.getAttribute('data-media');
                     srcAttr     = src.getAttribute('data-src') || parseSrcSet(src.getAttribute('data-srcset') || '');
+
+                    width       = src.getAttribute('width');
+                    height      = src.getAttribute('height');
 
                     if (mediaAttr && srcAttr) {
                         srcList[mediaAttr] = srcAttr;
@@ -78,6 +87,8 @@
                     media       : mql,
                     src         : srcList,
                     srcDefault  : srcDef,
+                    width  : width,
+                    height  : height,
                     matches     : false
                 });
 
@@ -127,6 +138,8 @@
                             if (!hasImg) {
                                 img             = document.createElement('img');
                                 img.alt         = pic.element.getAttribute('data-title') || 'picture';
+                                img.width         = pic.width;
+                                img.height         = pic.height;
                                 img.className   = 'match';
 
                                 pic.element.appendChild(img);

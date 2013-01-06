@@ -22,7 +22,7 @@ We've chosen to use a ```span``` as our picture element because it's not as comm
 
 Fallback for users without javascript enabled will see the ```noscript``` content.
 
-###Dependancies
+###Dependencies
 https://github.com/weblinc/media-match is the only dependancy thus far and we hope to keep it that way. Media is used to parse the ```data-media``` and ```srcset``` attributes.
 
 ####NOTE
