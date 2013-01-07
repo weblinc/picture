@@ -76,16 +76,16 @@
 
                     if (mediaAttr && srcAttr) {
                         srcList[mediaAttr] = {
-                          uri: srcAttr,
-                          width: width,
-                          height: height
+                            uri: srcAttr,
+                            width: width,
+                            height: height
                         };
                         mql += (mql.length ? ', ' : '') + mediaAttr;
                     } else if (srcAttr) {
                         srcDef = {
-                          uri: srcAttr,
-                          width: width,
-                          height: height
+                            uri: srcAttr,
+                            width: width,
+                            height: height
                         };
                     }
                 }
@@ -129,15 +129,16 @@
                     if (match && !(pic.matches === match.media) || !match && pic.srcDefault.uri) {
                         pic.matches = (match && match.media) || match;
 
-                        imgs    = pic.element.getElementsByTagName('img');
+                        imgs = pic.element.getElementsByTagName('img');
+
                         if (match.media && pic.src[match.media].uri) {
-                          src = (match.media && pic.src[match.media].uri);
-                          width = pic.src[match.media].width;
-                          height = pic.src[match.media].height;
+                            src     = (match.media && pic.src[match.media].uri);
+                            width   = pic.src[match.media].width;
+                            height  = pic.src[match.media].height;
                         } else {
-                          src = pic.srcDefault.uri;
-                          width = pic.srcDefault.width;
-                          height = pic.srcDefault.height;
+                            src     = pic.srcDefault.uri;
+                            width   = pic.srcDefault.width;
+                            height  = pic.srcDefault.height;
                         }
 
                         if (src) {
@@ -155,10 +156,10 @@
                                 img             = document.createElement('img');
                                 img.alt         = pic.element.getAttribute('data-title') || 'picture';
                                 if (width) {
-                                  img.width = width;
+                                    img.width = width;
                                 }
                                 if (height) {
-                                  img.height = height;
+                                    img.height = height;
                                 }
                                 img.className   = 'match';
 
