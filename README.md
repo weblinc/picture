@@ -28,4 +28,4 @@ We've chosen to use a ```span``` as our picture element because it's not as comm
 Fallback for users without javascript enabled will see the ```noscript``` content.
 
 ###Dependencies
-None, unless a polyfill is required for window.matchMedia with listener support. If your project requires support of IE <= 8 or iOS <= 5.0 or Opera <= 12, try https://github.com/weblinc/media-match.
+None, unless a polyfill is required for window.matchMedia with listener support. If your project requires support of IE <= 8 or iOS <= 5.0 or Opera <= 12, try https://github.com/weblinc/media-match. It's another of our projects focused on performance, near full CSS3 feature support and broad browser compatibility.
