@@ -1,195 +1,118 @@
-/* Picture - Picture element polyfill for responsive images. Authors & copyright (c) 2012: WebLinc, David Knight. */
-/* NOTE: Depends on Media object. See https://github.com/weblinc/media-match */
+/* Picture - Picture element polyfill for responsive images. Authors & copyright (c) 2013: WebLinc, David Knight. */
 
 // Picture
 (function(win) {
     'use strict';
 
-    var _doc        = win.document,
-        _picl       = 0,
-        _ratioExpr  = /\s+[\d\.]+x\s*,?/g,
-        _srcExpr    = /[^\s]+/g,
-        _res        = win.Media.features.resolution,
-        _timer      = 0;
-
-    /*
-        parseSrcSet
-    */
-    function parseSrcSet(src, precise) {
-        var ratios  = src.match(_ratioExpr) || [],
-            ratiol  = ratios.length,
-            srcList = src.replace(_ratioExpr, ' ').match(_srcExpr);
-
-        while (ratiol--) {
-            var dppx = parseFloat(ratios[ratiol]) * 96;
-
-            if (_res === dppx || (precise === false && Math.floor(_res / 96) === Math.floor(dppx / 96))) {
-                return srcList[ratiol];
-            }
-        }
-
-        if (typeof precise === 'undefined') {
-            return parseSrcSet(src, false);
-        }
-
-        return null;
-    }
-
-    win.Picture = {
-        // Properties
-        pictures: [],
-
-        // Methods
+    var _doc            = win.document,
+        _eventPrefix    = '',
+        _addEvent       = win.addEventListener || (_eventPrefix = 'on') && win.attachEvent,
+        _removeEvent    = win.removeEventListener || win.detachEvent,
 
         /*
-            parse
+            init
         */
-        parse: function() {
-            win.Picture.pictures = [];
+        _init       = function() {
+            _removeEvent(_eventPrefix + 'load', _init);
 
-            var pics    = _doc.getElementsByTagName('span'),
-                picl    = pics.length,
-                pic     = null;
-
-            while (picl-- && (pic = pics[picl])) {
-                if (pic.getAttribute('data-picture') === null) {
-                    continue;
-                }
-
-                var srcs        = pic.getElementsByTagName('span'),
-                    srcl        = srcs.length,
-                    src         = null,
-                    mql         = '',
-                    srcList     = {},
-                    mediaAttr   = '',
-                    srcAttr     = '',
-                    srcDef      = '',
-                    width       = '',
-                    height      = '';
-
-                while (srcl-- && (src = srcs[srcl])) {
-                    mediaAttr   = src.getAttribute('data-media');
-                    srcAttr     = src.getAttribute('data-src') || parseSrcSet(src.getAttribute('data-srcset') || '');
-
-                    width       = src.getAttribute('data-width') || '';
-                    height      = src.getAttribute('data-height') || '';
-
-                    if (mediaAttr && srcAttr) {
-                        srcList[mediaAttr] = {
-                            uri: srcAttr,
-                            width: width,
-                            height: height
-                        };
-                        mql += (mql.length ? ', ' : '') + mediaAttr;
-                    } else if (srcAttr) {
-                        srcDef = {
-                            uri: srcAttr,
-                            width: width,
-                            height: height
-                        };
-                    }
-                }
-
-                Picture.pictures.push({
-                    element     : pic,
-                    media       : mql,
-                    src         : srcList,
-                    srcDefault  : srcDef,
-                    matches     : false
-                });
-
-                _picl++;
-            }
+            win.Picture.parse();
         },
 
         /*
             watch
         */
-        watch: function(evt) {
-            clearTimeout(_timer);
+        _watch = function(picture, mql) {
+            var handler = function(mql) {
+                var match = null;
 
-            _timer = setTimeout(function() {
-                var id = _picl;
+                if (picture.parentNode === null) {
+                    mql.removeListener(handler);
+                }
+
+                // Loop over all media queries associated with this 'picture' element and
+                // set variable 'match' which will be the last query to eval to true
+                for (var i = 0; i < picture.pictureMedia.length; i++) {
+                    if (picture.pictureMedia[i].mql.matches) {
+                        match = picture.pictureMedia[i];
+                    }
+                }
+
+                if (match) {
+                    if (picture.pictureImage) {
+                        picture.pictureImage.src = match.src;
+                    } else {
+                        picture.pictureImage = _doc.createElement('img');
+                        picture.appendChild(picture.pictureImage);
+                        picture.pictureImage.src = match.src;
+                    }
+                }
+            };
+
+            handler(mql);
+
+            return handler;
+        };
+
+    win.Picture = {
+        /*
+            parse
+        */
+        parse: function() {
+            var picList     = _doc.getElementsByTagName('span'),
+                picIndex    = picList.length - 1,
+                picLength   = picIndex,
+                pic         = null,
+
+                srcList        = null,
+                srcIndex    = 0,
+                srcLength   = 0,
+                src         = null,
+
+                media       = '',
+                mql         = null;
+
+            if (picIndex < 0) {
+                return;
+            }
+
+            do {
+                pic = picList[picLength - picIndex];
+
+                if (pic.getAttribute('data-picture') === null || 'pictureMedia' in pic) {
+                    continue;
+                }
+
+                pic.pictureMedia = [];
+                pic.pictureImage = pic.getElementsByTagName('img')[0];
+
+                srcList     = pic.getElementsByTagName('span');
+                srcIndex    = srcList.length - 1;
+                srcLength   = srcIndex;
+
+                if (srcIndex < 0) {
+                    continue;
+                }
 
                 do {
-                    var pic     = win.Picture.pictures[id],
-                        imgs    = [],
-                        img     = null,
-                        hasImg  = false,
-                        src     = '',
-                        width   = '',
-                        height  = '',
-                        prev    = null,
-                        match   = false;
+                    src = srcList[srcLength - srcIndex];
+                    media = src.getAttribute('data-media');
 
-                    if (typeof pic === 'undefined') { continue; }
+                    if (media && window.matchMedia) {
+                        mql = window.matchMedia(media);
 
-                    match = win.Media.parseMatch(pic.media, true);
+                        pic.pictureMedia.push({
+                            mql : mql,
+                            src : src.getAttribute('data-src'),
+                            img : null
+                        });
 
-                    if (match && !(pic.matches === match.media) || !match && pic.srcDefault.uri) {
-                        pic.matches = (match && match.media) || match;
-
-                        imgs = pic.element.getElementsByTagName('img');
-
-                        if (match.media && pic.src[match.media].uri) {
-                            src     = (match.media && pic.src[match.media].uri);
-                            width   = pic.src[match.media].width;
-                            height  = pic.src[match.media].height;
-                        } else {
-                            src     = pic.srcDefault.uri;
-                            width   = pic.srcDefault.width;
-                            height  = pic.srcDefault.height;
-                        }
-
-                        if (src) {
-                            for (var i = 0, il = imgs.length; i < il; i++) {
-                                img = imgs[i];
-                                if (img.getAttribute('src') === src) {
-                                    img.className = 'match';
-                                    hasImg = true;
-                                } else if (img.className !== 'unmatch') {
-                                    img.className = 'unmatch';
-                                }
-                            }
-
-                            if (!hasImg) {
-                                img             = document.createElement('img');
-                                img.alt         = pic.element.getAttribute('data-title') || 'picture';
-                                if (width) {
-                                    img.width = width;
-                                }
-                                if (height) {
-                                    img.height = height;
-                                }
-                                img.className   = 'match';
-
-                                pic.element.appendChild(img);
-
-                                img.src = src;
-                            }
-                        }
-                    } else if (!match) {
-                        pic.matches = false;
+                        mql.addListener(_watch(pic, mql));
                     }
-
-                } while(id--);
-            }, 10);
-        },
-
-        /*
-            init
-        */
-        init: function() {
-            win.Picture.parse();
-            win.Picture.watch();
-
-            win.Media.listen(win.Picture.watch);
+                } while (srcIndex--);
+            } while (picIndex--);
         }
     };
 
-    if (win.addEventListener) {
-        win.addEventListener('load', win.Picture.init);
-    } else {
-        win.attachEvent('onload', win.Picture.init);
-    }
+    // Set up listeners
+    _addEvent(_eventPrefix + 'load', _init);
 })(window);
