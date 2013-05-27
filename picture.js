@@ -1,4 +1,4 @@
-/* Picture - Picture element polyfill for responsive images. Authors & copyright (c) 2013: WebLinc, David Knight. */
+/* Picture v2.1.0 - Picture element polyfill for responsive images. Authors & copyright (c) 2013: WebLinc, David Knight. */
 
 // Picture
 (function(win) {
