@@ -30,5 +30,15 @@ We've chosen to use a ```span``` as our picture element because it's not as comm
 
 Fallback for users without javascript enabled will see the ```noscript``` content.
 
+###Future improvements
+* ```picture``` ```data-srcset``` attribute support (supercedes ```src``` attribute and ```source``` elements)
+* ```picture``` ```data-src``` attribute support (supercedes ```source``` elements)
+* ```source``` ```data-srcset``` attribute support
+* Content negotiation based on the previous 3 ways of setting image content
+* ```picture``` ```data-media``` attribute support (currently matched media query)
+* ```picture``` ```data-current-src``` attribute support (current src url)
+* ```picture``` ```data-width``` attribute support
+* ```picture``` ```data-height``` attribute support
+
 ###Dependencies
 None, unless a polyfill is required for window.matchMedia with listener support. If your project requires support of IE <= 8 or iOS <= 5.0 or Opera <= 12, try https://github.com/weblinc/media-match. It's another of our projects focused on performance, near full CSS3 feature support and broad browser compatibility.
