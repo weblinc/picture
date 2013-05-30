@@ -41,4 +41,4 @@ Fallback for users without javascript enabled will see the ```noscript``` conten
 * ```picture``` ```data-height``` attribute support
 
 ###Dependencies
-None, unless a polyfill is required for window.matchMedia with listener support. If your project requires support of IE <= 8 or iOS <= 5.0 or Opera <= 12, try https://github.com/weblinc/media-match. It's another of our projects focused on performance, near full CSS3 feature support and broad browser compatibility.
+None, unless a polyfill is required for window.matchMedia with listener support. If your project requires support of IE <= 9 or iOS <= 5.0 or Opera <= 12, try https://github.com/weblinc/media-match. It's another of our projects focused on performance, near full CSS3 feature support and broad browser compatibility.
