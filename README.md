@@ -14,7 +14,10 @@ Responsive images based on the 'picture' element proposal. See http://picture.re
     <span data-src="my_low.jpg" data-media="(max-width: 400px)"></span>
     <span data-src="my_medium.jpg" data-media="(max-width: 750px)"></span>
     <span data-src="my_high.jpg" data-media="(max-width: 1000px)"></span>
+    <!--
+    Not currently supported as of v2.1.0
     <span data-srcset="my-1.jpg 1x, my-2.jpg 2x" />
+    -->
     
     <!-- Fallback content -->
     <noscript>
