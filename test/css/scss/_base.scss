@@ -1,0 +1,79 @@
+
+/* ===RESETS=== */
+
+html	{ font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body 	{ margin: 0; font-family: $fontFamily; line-height: 1.6; color: $textColor; @include wordBreak(); background: #fff; }
+
+/* HTML5 Reset */
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, nav, section, summary { display: block; }
+audio, canvas, video { display: inline-block; }
+
+/* ===GENERAL ELEMENT STYLES=== */
+
+h1,
+.heading1 	{ margin: 0 0 20 / 36 * 1em; font-size: 36 / 16 * 1em; line-height: 42 / 36 * 1em; text-transform: none; font-weight: bold; font-style: none; font-family: $fontFamilyAlt; color: $textColor; }
+h2,
+.heading2 	{ margin: 0 0 20 / 28 * 1em; font-size: 28 / 16 * 1em; line-height: 36 / 28 * 1em; text-transform: none; font-weight: bold; font-style: none; font-family: $fontFamilyAlt; color: $textColor; }
+h3,
+.heading3 	{ margin: 0 0 10 / 22 * 1em; font-size: 22 / 16 * 1em; line-height: 28 / 22 * 1em; text-transform: none; font-weight: bold; font-style: none; font-family: $fontFamilyAlt; color: $textColor; }
+h4,
+.heading4 	{ margin: 0 0 10 / 22 * 1em; font-size: 22 / 16 * 1em; line-height: 28 / 18 * 1em; text-transform: none; font-weight: normal; font-style: italic; font-family: $fontFamily; color: $textColorAlt; }
+h5,
+.heading5 	{ margin: 0 0 10 / 16 * 1em; font-size: 1em; line-height: 1.6; text-transform: none; font-weight: bold; font-style: none; font-family: $fontFamilyAlt; color: $textColor; }
+h6,
+.heading6 	{ margin: 0 0 1em; font-size: 14 / 16 * 1em; line-height: 1.6; text-transform: uppercase; font-weight: normal; font-style: none; font-family: $fontFamilyAlt; color: $textColor; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { padding: 0; }
+
+.hgroup,
+hgroup { margin-bottom: 20 / 16 * 1em;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	[class*=heading] { margin: 0; }
+}
+
+[class*=heading] { display: block; }
+
+a	{ text-decoration: underline; color: $accent; @include transition( color, .2 );
+
+	&:focus 	{ outline: thin dotted; }
+	&:active,
+	&:hover 	{ outline: 0; }
+	&:hover,
+	&:focus 	{ color: $accentAlt; }
+
+}
+
+[class*=button] 	{ margin: 0 .5em 1.25em 0; padding: .5em 1em; display: inline-block; @include transition( background, .2 ); font-family: $fontFamilyAlt; background: $accent; color: $textColor; font-weight: bold; text-transform: lowercase; text-decoration: none;
+	
+	&:hover,
+	&:focus		{ background: $accentAlt; color: #fff; }
+
+}
+
+.button-red 		{ background: #FF4629; }
+.button-gray 		{ background: $objectColor; color: $objectColorAlt; }
+.button-small 	{ font-size: 12 / 16 * 1em; }
+.button-large 	{ font-size: 20 / 16 * 1em; }
+
+p,
+ul,
+ol 			{ margin: 0 0 24 / 16 * 1em; padding: 0; font-size: 1em; }
+ul,
+ol 			{ margin-left: 24 / 16 * 1em; }
+ul ul,
+ol ol 	{ margin-bottom: 0; }
+li 			{ margin: 0; padding: 0; }
+
+img { max-width: 100%; width: auto; height: auto; border: 0; display: block; -ms-interpolation-mode: bicubic; }

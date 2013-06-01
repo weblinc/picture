@@ -1,0 +1,46 @@
+/* ===
+Site Skeleton Boiler Plate
+Pete Schuster http://peteschuster.com
+Version: 2
+Credits:
+320 and Up - URL: http://stuffandnonsense.co.uk/projects/320andup/
+HTML5 Boilerplate - URL: http://h5bp.com/
+=== */
+
+//variables
+@import 'variables';
+
+//custom mixins
+@import	'mixins';
+
+//Base Styles
+@import	'base';
+
+//Mobile First CSS
+@import	'media320';
+
+/* ===MEDIA QUERIES START=== */
+
+@media only screen and (min-width: 768px) { 
+
+	@import	'media768';
+
+}
+
+@media only screen and (min-width: 1024px) { 
+
+  @import 'media1024';
+
+}
+
+@media only print { 
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter: none !important; -ms-filter: none !important; }
+  .header, .footer, .sidebar, img, form { display: none !important; }
+  #container, .content, .content-main { width:100%; padding: 0; margin: 0; }
+  a { text-decoration: underline; }
+  pre, blockquote, tr, h2, h3 { page-break-inside: avoid; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+}
+
+//Helper classes
+@import	'utility';

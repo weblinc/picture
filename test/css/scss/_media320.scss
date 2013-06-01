@@ -1,0 +1,33 @@
+
+/* ===BEGIN STRUCTURE AND CUSTOM ELEMENTS=== */
+
+.wrapper 		{ margin: 0 20px; }
+
+.content-block { padding: 40px 0;
+
+  & + & { border-top: 1px solid $borderColor; }
+
+}
+
+/* ===HEADER START=== */
+
+.header 	{ margin-bottom: 20px; padding: 20px 0; background: $accent; text-align: center;
+
+  a { color: $baseDark; }
+
+}
+
+/* ===CONTENT START=== */
+
+.content 	{ margin-bottom: 1.25em; }
+
+.example  { padding: 20px; background: #eee; }
+
+img { margin: 0 auto; }
+
+article img   { margin: 0 20px 20px 0; float: left; }
+
+/* ===FOOTER START=== */
+
+.footer   { background: $textColor; color: #fff; }
+.footer a { color: #fff; }
