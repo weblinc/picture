@@ -1,0 +1,451 @@
+/* ===
+Site Skeleton Boiler Plate
+Pete Schuster http://peteschuster.com
+Version: 2
+Credits:
+320 and Up - URL: http://stuffandnonsense.co.uk/projects/320andup/
+HTML5 Boilerplate - URL: http://h5bp.com/
+=== */
+/* ===MIXINS=== */
+/* ===RESETS=== */
+/* line 4, /sites/picture/test/css/scss/_base.scss */
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 5, /sites/picture/test/css/scss/_base.scss */
+body {
+  margin: 0;
+  font-family: "Noto Serif", serif;
+  line-height: 1.6;
+  color: #34495e;
+  -ms-word-wrap: break-all;
+  word-wrap: break-all;
+  word-wrap: break-word;
+  background: #fff;
+}
+
+/* HTML5 Reset */
+/* line 10, /sites/picture/test/css/scss/_base.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+/* line 11, /sites/picture/test/css/scss/_base.scss */
+audio, canvas, video {
+  display: inline-block;
+}
+
+/* ===GENERAL ELEMENT STYLES=== */
+/* line 16, /sites/picture/test/css/scss/_base.scss */
+h1,
+.heading1 {
+  margin: 0 0 0.55556em;
+  font-size: 2.25em;
+  line-height: 1.16667em;
+  text-transform: none;
+  font-weight: bold;
+  font-style: none;
+  font-family: "Open Sans", sans-serif;
+  color: #34495e;
+}
+
+/* line 18, /sites/picture/test/css/scss/_base.scss */
+h2,
+.heading2 {
+  margin: 0 0 0.71429em;
+  font-size: 1.75em;
+  line-height: 1.28571em;
+  text-transform: none;
+  font-weight: bold;
+  font-style: none;
+  font-family: "Open Sans", sans-serif;
+  color: #34495e;
+}
+
+/* line 20, /sites/picture/test/css/scss/_base.scss */
+h3,
+.heading3 {
+  margin: 0 0 0.45455em;
+  font-size: 1.375em;
+  line-height: 1.27273em;
+  text-transform: none;
+  font-weight: bold;
+  font-style: none;
+  font-family: "Open Sans", sans-serif;
+  color: #34495e;
+}
+
+/* line 22, /sites/picture/test/css/scss/_base.scss */
+h4,
+.heading4 {
+  margin: 0 0 0.45455em;
+  font-size: 1.375em;
+  line-height: 1.55556em;
+  text-transform: none;
+  font-weight: normal;
+  font-style: italic;
+  font-family: "Noto Serif", serif;
+  color: #95a5a6;
+}
+
+/* line 24, /sites/picture/test/css/scss/_base.scss */
+h5,
+.heading5 {
+  margin: 0 0 0.625em;
+  font-size: 1em;
+  line-height: 1.6;
+  text-transform: none;
+  font-weight: bold;
+  font-style: none;
+  font-family: "Open Sans", sans-serif;
+  color: #34495e;
+}
+
+/* line 26, /sites/picture/test/css/scss/_base.scss */
+h6,
+.heading6 {
+  margin: 0 0 1em;
+  font-size: 0.875em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-style: none;
+  font-family: "Open Sans", sans-serif;
+  color: #34495e;
+}
+
+/* line 33, /sites/picture/test/css/scss/_base.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+}
+
+/* line 36, /sites/picture/test/css/scss/_base.scss */
+.hgroup,
+hgroup {
+  margin-bottom: 1.25em;
+}
+/* line 43, /sites/picture/test/css/scss/_base.scss */
+.hgroup h1,
+.hgroup h2,
+.hgroup h3,
+.hgroup h4,
+.hgroup h5,
+.hgroup h6,
+.hgroup [class*=heading],
+hgroup h1,
+hgroup h2,
+hgroup h3,
+hgroup h4,
+hgroup h5,
+hgroup h6,
+hgroup [class*=heading] {
+  margin: 0;
+}
+
+/* line 46, /sites/picture/test/css/scss/_base.scss */
+[class*=heading] {
+  display: block;
+}
+
+/* line 48, /sites/picture/test/css/scss/_base.scss */
+a {
+  text-decoration: underline;
+  color: #1abc9c;
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+/* line 50, /sites/picture/test/css/scss/_base.scss */
+a:focus {
+  outline: thin dotted;
+}
+/* line 52, /sites/picture/test/css/scss/_base.scss */
+a:active, a:hover {
+  outline: 0;
+}
+/* line 54, /sites/picture/test/css/scss/_base.scss */
+a:hover, a:focus {
+  color: #2c3e50;
+}
+
+/* line 58, /sites/picture/test/css/scss/_base.scss */
+[class*=button] {
+  margin: 0 0.5em 1.25em 0;
+  padding: 0.5em 1em;
+  display: inline-block;
+  -webkit-transition: background 0.2s ease-in-out;
+  -moz-transition: background 0.2s ease-in-out;
+  -o-transition: background 0.2s ease-in-out;
+  -ms-transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out;
+  font-family: "Open Sans", sans-serif;
+  background: #1abc9c;
+  color: #34495e;
+  font-weight: bold;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+/* line 61, /sites/picture/test/css/scss/_base.scss */
+[class*=button]:hover, [class*=button]:focus {
+  background: #2c3e50;
+  color: #fff;
+}
+
+/* line 65, /sites/picture/test/css/scss/_base.scss */
+.button-red {
+  background: #FF4629;
+}
+
+/* line 66, /sites/picture/test/css/scss/_base.scss */
+.button-gray {
+  background: #ecf0f1;
+  color: #34495e;
+}
+
+/* line 67, /sites/picture/test/css/scss/_base.scss */
+.button-small {
+  font-size: 0.75em;
+}
+
+/* line 68, /sites/picture/test/css/scss/_base.scss */
+.button-large {
+  font-size: 1.25em;
+}
+
+/* line 72, /sites/picture/test/css/scss/_base.scss */
+p,
+ul,
+ol {
+  margin: 0 0 1.5em;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* line 74, /sites/picture/test/css/scss/_base.scss */
+ul,
+ol {
+  margin-left: 1.5em;
+}
+
+/* line 76, /sites/picture/test/css/scss/_base.scss */
+ul ul,
+ol ol {
+  margin-bottom: 0;
+}
+
+/* line 77, /sites/picture/test/css/scss/_base.scss */
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 79, /sites/picture/test/css/scss/_base.scss */
+img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  border: 0;
+  display: block;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* ===BEGIN STRUCTURE AND CUSTOM ELEMENTS=== */
+/* line 4, /sites/picture/test/css/scss/_media320.scss */
+.wrapper {
+  margin: 0 20px;
+}
+
+/* line 6, /sites/picture/test/css/scss/_media320.scss */
+.content-block {
+  padding: 40px 0;
+}
+/* line 8, /sites/picture/test/css/scss/_media320.scss */
+.content-block + .content-block {
+  border-top: 1px solid #95a5a6;
+}
+
+/* ===HEADER START=== */
+/* line 14, /sites/picture/test/css/scss/_media320.scss */
+.header {
+  margin-bottom: 20px;
+  padding: 20px 0;
+  background: #1abc9c;
+  text-align: center;
+}
+/* line 16, /sites/picture/test/css/scss/_media320.scss */
+.header a {
+  color: #34495e;
+}
+
+/* ===CONTENT START=== */
+/* line 22, /sites/picture/test/css/scss/_media320.scss */
+.content {
+  margin-bottom: 1.25em;
+}
+
+/* line 24, /sites/picture/test/css/scss/_media320.scss */
+.example {
+  padding: 20px;
+  background: #eee;
+}
+
+/* line 26, /sites/picture/test/css/scss/_media320.scss */
+img {
+  margin: 0 auto;
+}
+
+/* line 28, /sites/picture/test/css/scss/_media320.scss */
+article img {
+  margin: 0 20px 20px 0;
+  float: left;
+}
+
+/* ===FOOTER START=== */
+/* line 32, /sites/picture/test/css/scss/_media320.scss */
+.footer {
+  background: #34495e;
+  color: #fff;
+}
+
+/* line 33, /sites/picture/test/css/scss/_media320.scss */
+.footer a {
+  color: #fff;
+}
+
+/* ===MEDIA QUERIES START=== */
+@media only screen and (min-width: 768px) {
+  /* line 1, /sites/picture/test/css/scss/_media768.scss */
+  .wrapper {
+    margin: 0 auto;
+    width: 728px;
+  }
+
+  /* line 3, /sites/picture/test/css/scss/_media768.scss */
+  .example {
+    margin: 0 20px;
+    padding: 30px;
+  }
+
+  /* line 5, /sites/picture/test/css/scss/_media768.scss */
+  article img {
+    margin: 0 auto;
+    float: none;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  /* line 1, /sites/picture/test/css/scss/_media1024.scss */
+  .wrapper {
+    margin: 0 auto;
+    width: 984px;
+  }
+}
+@media only print {
+  /* line 37, /sites/picture/test/css/scss/style.scss */
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  /* line 38, /sites/picture/test/css/scss/style.scss */
+  .header, .footer, .sidebar, img, form {
+    display: none !important;
+  }
+
+  /* line 39, /sites/picture/test/css/scss/style.scss */
+  #container, .content, .content-main {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* line 40, /sites/picture/test/css/scss/style.scss */
+  a {
+    text-decoration: underline;
+  }
+
+  /* line 41, /sites/picture/test/css/scss/style.scss */
+  pre, blockquote, tr, h2, h3 {
+    page-break-inside: avoid;
+  }
+
+  /* line 42, /sites/picture/test/css/scss/style.scss */
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+}
+/* ===NON-SEMANTIC HELPER CLASES=== */
+/* line 3, /sites/picture/test/css/scss/_utility.scss */
+.right {
+  float: right;
+}
+
+/* line 4, /sites/picture/test/css/scss/_utility.scss */
+.left {
+  float: left;
+}
+
+/* line 5, /sites/picture/test/css/scss/_utility.scss */
+.clear {
+  clear: both;
+}
+
+/* line 6, /sites/picture/test/css/scss/_utility.scss */
+.hide {
+  display: none;
+}
+
+/* line 7, /sites/picture/test/css/scss/_utility.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* line 9, /sites/picture/test/css/scss/_utility.scss */
+.ir {
+  display: block;
+  text-indent: -999px;
+  overflow: hidden;
+}
+
+/* ===CLEAR FIX=== */
+/* line 13, /sites/picture/test/css/scss/_utility.scss */
+.clearfix:after {
+  height: 0;
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 14, /sites/picture/test/css/scss/_utility.scss */
+.clearfix {
+  display: inline-block;
+  zoom: 1;
+}
+
+/* line 15, /sites/picture/test/css/scss/_utility.scss */
+.clearfix {
+  display: block;
+}

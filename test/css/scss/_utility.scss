@@ -1,0 +1,15 @@
+/* ===NON-SEMANTIC HELPER CLASES=== */
+
+.right 	{ float: right}
+.left 	{ float: left; }
+.clear 	{ clear: both; }
+.hide 	{ display: none; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+.ir 	{ display: block; text-indent: -999px; overflow: hidden; }
+
+/* ===CLEAR FIX=== */
+
+.clearfix:after { height: 0; content: "."; display: block; clear: both; visibility: hidden; }
+.clearfix 		{ display: inline-block; zoom: 1; }
+.clearfix 		{ display: block; }
