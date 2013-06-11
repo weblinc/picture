@@ -1,19 +1,108 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Picture polyfill</title>
-        <script type="text/javascript" src="../picture.min.js"></script>
-    </head>
-    <body>
-        <span data-picture data-alt="It's a Koala!">
-            <span data-src="lib/Koala_low.jpg" data-media="(min-width: 400px)"></span>
-            <span data-src="lib/Koala_medium.jpg" data-media="(min-width: 800px)"></span>
-            <span data-src="lib/Koala_high.jpg" data-media="(min-width: 1000px)"></span>
-            
-            <!-- Fallback content -->
-            <noscript>
-                <img src="lib/Koala-1.jpg" alt="It's a Koala!" />
-            </noscript>
-        </span>
-    </body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+<meta charset="utf-8">
+<title>Picture polyfill</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta property="og:title" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta property="og:image" content="images/ui/facebook.jpg">
+<meta property="og:site_name" content="">
+<meta property="og:description" content="">
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ui/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ui/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ui/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="images/ui/apple-touch-icon-57x57-precomposed.png">
+<link rel="shortcut icon" href="images/ui/favicon.ico">
+
+<link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic|Open+Sans:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/style.css?ver=1.0">
+<!--[if lte IE 8]><link rel="stylesheet" href="css/ie.css?ver=1.0"><![endif]-->
+
+<script type="text/javascript" src="../picture.min.js"></script>
+
+</head>
+<body>
+
+<header class="header content-block clearfix" role="banner"><div class="wrapper">
+
+    <h1>picture</h1>
+    
+</div></header><!--/end .header-->
+
+<div class="content clearfix" role="main">
+
+    <div class="content-block"><div class="wrapper">
+        
+        <h1>Basic Example: Resolution/Size Change</h1>
+        <p>In its most basic form, picture can serve your users with the most appropriate image file size and dimensions based on their viewport width. The example below offers the user the same image, but with different dimensions and thus file sizes. It's important to note that viewport width is not a direct indicator of bandwidth, but serving images that are too big for the user's viewport are an unecessary weight on their page speed.</p>
+
+        <div class="example">
+
+            <span data-picture data-alt="A very grumpy bird">
+                <span data-src="images/grumpy-bird.jpg" data-media="(min-width: 320px)"></span>
+                <span data-src="images/grumpy-bird-768.jpg" data-media="(min-width: 768px)"></span>
+                <span data-src="images/grumpy-bird-1024.jpg" data-media="(min-width: 1024px)"></span>
+                
+                <!-- Fallback content -->
+                <noscript>
+                    <img src="images/grumpy-bird.jpg" alt="A very grumpy bird" />
+                </noscript>
+            </span>
+
+        </div><!--/end .example-->
+        
+    </div></div><!--/end .content-block-->
+
+    <div class="content-block"><div class="wrapper">
+        
+        <h1>Recropping</h1>
+        <p>As the layout of the page changes between media queries its sometimes necessary to recrop images so that still work within the design. A panorama image might be the best fit for a wider screen, when a thumbnail is required for smaller screens. We can use the picture element of this as well.</p>
+
+        <div class="example">
+
+            <article>
+
+                <header>
+                    <h1>A Very Content Frog</h1>
+                    <p>written by <b>David Knight</b> on <time datetime="2013-05-29">May 29th</time></p>
+                </header>
+
+                <p><span data-picture data-alt="A very content frog">
+                    <span data-src="images/frog.jpg" data-media="(min-width: 320px)"></span>
+                    <span data-src="images/frog-768.jpg" data-media="(min-width: 768px)"></span>
+                    <span data-src="images/frog-1024.jpg" data-media="(min-width: 1024px)"></span>
+                    
+                    <!-- Fallback content -->
+                    <noscript>
+                        <img src="images/frog.jpg" alt="A very content frog" />
+                    </noscript>
+                </span></p>
+
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+            </article>
+
+        </div><!--/end .example-->
+        
+    </div></div><!--/end .content-block-->
+
+</div><!--/end .content-->
+
+<footer class="footer content-block" role="contentinfo">
+    <div class="content-block"><div class="wrapper">
+
+        <span>Created by David Knight.</span>
+
+    </div></div><!--/end .content-block-->    
+</footer><!--/end .footer-->
+
+</body>
 </html>

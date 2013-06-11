@@ -1,0 +1,18 @@
+/* ===MIXINS=== */
+/* line 1, /sites/picture/test/css/scss/_media768.scss */
+.wrapper {
+  margin: 0 auto;
+  width: 728px;
+}
+
+/* line 3, /sites/picture/test/css/scss/_media768.scss */
+.example {
+  margin: 0 20px;
+  padding: 30px;
+}
+
+/* line 5, /sites/picture/test/css/scss/_media768.scss */
+article img {
+  margin: 0 auto;
+  float: none;
+}

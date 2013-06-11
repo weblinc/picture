@@ -1,0 +1,40 @@
+/* ===MIXINS=== */
+
+@mixin transition( $property, $time: 1, $easing: ease-in-out )	{
+	
+	$time: $time * 1s;
+	
+	-webkit-transition: $property $time $easing;
+	   -moz-transition: $property $time $easing;
+	     -o-transition: $property $time $easing;
+	    -ms-transition: $property $time $easing;
+	        transition: $property $time $easing;
+	
+}
+
+@mixin gradient( $startColor, $endColor, $startPosition: 0%, $endPosition: 100% ) 	{
+
+	background-color: $startColor; /* Old browsers */
+	background-image: -moz-linear-gradient(top, $startColor $startPosition, $endColor $endPosition); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop($startPosition,$startColor), color-stop($endPosition,$endColor)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, $startColor $startPosition,$endColor $endPosition); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top, $startColor $startPosition,$endColor $endPosition); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top, $startColor $startPosition,$endColor $endPosition); /* IE10+ */
+	background-image: linear-gradient(top, $startColor $startPosition,$endColor $endPosition); /* W3C */
+	
+}
+
+@mixin wordBreak(){
+
+	-ms-word-wrap: break-all;
+	    word-wrap: break-all;
+	    word-wrap: break-word;
+
+}
+
+@mixin box-sizing($prop: border-box){
+
+	-moz-box-sizing: border-box;
+			 box-sizing: border-box;
+
+}
