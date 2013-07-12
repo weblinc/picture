@@ -14,8 +14,8 @@
             init
         */
         _init       = function() {
-            _removeEvent(_eventPrefix + 'load', _init);
             _removeEvent(_eventPrefix + 'DOMContentLoaded', _init);
+            _removeEvent(_eventPrefix + 'load', _init);
 
             win.Picture.parse();
         },
@@ -31,12 +31,14 @@
                 sourceData = picture = null;
             } else {
                 if (!img) {
-                    img     = picture.pictureImage = _doc.createElement('img');
+                    img     = _doc.createElement('img');
                     img.alt = picture.pictureAlt;
                 }
 
-                if (sourceData && sourceData.src !== picture.pictureCurrentSrc) {
-                    img.src = picture.pictureCurrentSrc = sourceData.src;
+                if (sourceData) {
+                    img.src                 = picture.pictureCurrentSrc = sourceData.src;
+                    picture.pictureImage    = img;
+                    picture.pictureMedia    = (sourceData.mql && sourceData.mql.media) || '';
                     sourceData.element.appendChild(img);
                 }
             }
@@ -81,12 +83,12 @@
         /*
             createSourceData
         */
-        _createSourceData = function(element, src, mql, listener) {
+        _createSourceData = function() {
             return   {
-                element     : element,
-                src         : src,
-                mql         : mql,
-                listener    : listener,
+                mql         : null,
+                src         : null,
+                listener    : null,
+                element     : null,
                 toString    : function() {
                     return this.mql.matches ? 1 : 0;
                 }
@@ -100,14 +102,14 @@
             var srcsetCollection    = (srcsetAttr.indexOf(',') >= 0 && srcsetAttr.split(',')) || [srcsetAttr],
                 sourceMatch         = null;
 
-            for (var i = 0, srcset; typeof((srcset = srcsetCollection[i])) !== 'undefined'; i++) {
+            for (var i = srcsetCollection.length - 1, srcset; typeof((srcset = srcsetCollection[i])) !== 'undefined'; i--) {
                 var media       = mediaAttr || 'all',
                     hints       = srcset.match(_srcsetExpr),
                     src         = hints[0],
                     dppx        = parseFloat(hints[1], 10),
-                    sourceData  = null;
+                    sourceData  = _createSourceData();
 
-                if (dppx > 1) {
+                if (dppx) {
                     media = [
                                 '(-webkit-min-device-pixel-ratio: ' + dppx + ')',
                                 '(min-resolution: ' + dppx + 'dppx)',
@@ -117,7 +119,9 @@
                 }
 
                 if (media) {
-                    sourceData = _createSourceData(source, src, win.matchMedia(media), null);
+                    sourceData.mql      = win.matchMedia(media);
+                    sourceData.src      = src;
+                    sourceData.element  = source;
 
                     sourceData.mql.matches && (sourceMatch = sourceData);
 
@@ -139,41 +143,48 @@
                     var sourceCollection    = picture.getElementsByTagName('span'),
                         srcsetAttr          = picture.getAttribute('data-srcset'),
                         srcAttr             = '',
-                        img                 = picture.getElementsByTagName('img')[0],
                         sourceData          = null,
-                        srcsetSourceMatch   = null,
+                        img                 = picture.getElementsByTagName('img')[0],
+                        parsedSourceMatch   = null,
                         sourceMatch         = null;
 
                     picture.pictureSource       = [];
-                    picture.pictureImage        = img && img.parentNode.nodeName !== 'NOSCRIPT' && img;
+                    picture.pictureImage        = img && img.parentNode.nodeName.toLowerCase() !== 'noscript' && img; // Test for parent node is for iOS 5
                     picture.pictureAlt          = picture.getAttribute('data-alt') || (img && img.getAttribute('alt')) || 'picture';
                     picture.pictureCurrentSrc   = '';
+                    picture.pictureMedia        = '';
 
                     if (srcsetAttr) {
-                        srcsetSourceMatch = _parseSrcset(picture, picture, srcsetAttr, '');
-                        srcsetSourceMatch && (sourceMatch = srcsetSourceMatch);
+                        parsedSourceMatch = _parseSrcset(picture, picture, srcsetAttr, '');
+                        parsedSourceMatch && (sourceMatch = parsedSourceMatch);
                     } else {
-                        srcAttr = picture.getAttribute('data-src');
+                        srcAttr     = picture.getAttribute('data-src');
                         if (srcAttr) {
-                            sourceMatch = sourceData = _createSourceData(picture, srcAttr, null, null);
+                            sourceData          = _createSourceData();
+                            sourceData.src      = srcAttr;
+                            sourceData.element  = picture;
+                            sourceMatch         = sourceData;
                         }
                     }
 
                     if (!srcsetAttr && !srcAttr) {
                         for (var j = sourceCollection.length - 1, source; typeof((source = sourceCollection[j])) !== 'undefined'; j--) {
-                            var mediaAttr = source.getAttribute('data-media');
+                            var mediaAttr   = source.getAttribute('data-media');
 
                             srcsetAttr  = source.getAttribute('data-srcset');
                             srcAttr     = '';
+                            sourceData  = _createSourceData();
 
                             if (srcsetAttr) {
-                                srcsetSourceMatch = _parseSrcset(picture, source, srcsetAttr, mediaAttr);
-                                srcsetSourceMatch && (sourceMatch = srcsetSourceMatch);
+                                parsedSourceMatch = _parseSrcset(picture, source, srcsetAttr, mediaAttr);
+                                parsedSourceMatch && (sourceMatch = parsedSourceMatch);
                             } else if (mediaAttr) {
                                 srcAttr = source.getAttribute('data-src');
 
                                 if (srcAttr) {
-                                    sourceData = _createSourceData(source, srcAttr, win.matchMedia(mediaAttr), null);
+                                    sourceData.mql      = win.matchMedia(mediaAttr);
+                                    sourceData.src      = srcAttr;
+                                    sourceData.element  = source;
 
                                     sourceData.mql.matches && (sourceMatch = sourceData);
 
