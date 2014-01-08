@@ -180,6 +180,9 @@
                                     picture.pictureSource.push(sourceData);
                                 }
                             }
+                            if ( j === 0 ) {
+                                break;
+                            }
                         }
                     }
 
